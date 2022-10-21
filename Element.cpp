@@ -1,16 +1,17 @@
-#include "List.h"
-template <class T> List<T>::List()
+#include "Element.h"
+template <class T> Element<T>::Element()
 {
     realsize = 100;
     size = 0;
     F = new T[realsize];
 }
 
-template <class T> List<T>::~List()
+template <class T> Element<T>::~Element()
 {
+    delete[] this->F;
 }
 
-template <class T> void List<T>::Add(T t)
+template <class T> void Element<T>::Add(T t)
 {
     if(size == realsize)
     {
@@ -31,19 +32,19 @@ template <class T> void List<T>::Add(T t)
 }
 
 
-template <class T> int List<T> ::Getsize()
+template <class T> int Element<T> ::Getsize()
 {
     return size;
 }
 
 
 template <class T>
-T List<T> ::Getindex(int i)
+T Element<T> ::Getindex(int i)
 {
     return *(F+i);
 }
 
-template <class T> void List<T> ::Delete(int index)
+template <class T> void Element<T> ::Delete(int index)
 {
     for(int i = index; i < size - 1; i++)
     {
@@ -52,5 +53,5 @@ template <class T> void List<T> ::Delete(int index)
     size--;
 }
 
-template class List<int>;
-template class List<admin>;
+template class Element<int>;
+template class Element<admin>;
