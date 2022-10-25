@@ -55,3 +55,4 @@ template <class T> void Element<T> ::Delete(int index)
 
 template class Element<int>;
 template class Element<admin>;
+template class Element<Staff>;

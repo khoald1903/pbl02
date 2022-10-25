@@ -1,11 +1,26 @@
-#include "Element.cpp"
+#include "Element.h"
 
-admin Get(string user, string pass)
+
+admin GetAdmin(string user, string pass)
 {
     admin node;
     node.setuser(user);
     node.setpass(pass);
     return node;
+}
+
+Staff GetStaff(string id, string pass)
+{
+    Staff node;
+    node.SetID(id);
+    node.SetPass(pass);
+    return node;
+}
+
+ostream &operator<<(ostream &out, Staff staff)
+{
+    out << staff.GetID() << staff.GetPass() << endl;
+    return out;
 }
 
 template <class T>
@@ -16,7 +31,7 @@ void CreateRepo(Element<T> &element, string str, T Func(string, string))
     {
         *(x+i)=str[i];
     }
-    freopen(x, "r", stdin);
+    FILE* f = freopen(x, "r", stdin);
     string s;
     while (cin >> s)
     {
@@ -38,13 +53,21 @@ void CreateRepo(Element<T> &element, string str, T Func(string, string))
         T node = Func(id, pass);
         element.Add(node);
     }
+    fclose(f);
 }
 
 int main()
 {
-    
+    Element<Staff> list01;
+    CreateRepo(list01, "account01.txt", GetStaff);
+    for (int i = 0; i < list01.Getsize(); i++)
+    {
+        cout << list01.Getindex(i);
+        cout << endl;
+    }
+
     Element<admin> list;
-    CreateRepo( list,"account.txt", Get);
+    CreateRepo(list, "account.txt", GetAdmin);
     for (int i = 0; i < list.Getsize(); i++)
     {
         cout << list.Getindex(i).getUser();
