@@ -1,7 +1,7 @@
 #include "Element.h"
 Element<admin> ListAdmin;
 Element<Staff> ListStaff;
-
+ofstream outfile;
 admin GetAdmin(string user, string pass)
 {
     admin node;
@@ -107,17 +107,19 @@ bool Login(int flag)
 }
 
 template <class T>
-void CreateRepo(Element<T> &element, string str, T Func(string, string))
+void CreateRepo(Element<T> &element, string str, T Func(string, string),fstream &File)
 {
     char *x = new char[str.size() - 1];
     for (int i=0;i<str.size();i++)
     {
         *(x+i)=str[i];
     }
-    FILE* f = freopen(x, "r", stdin);
+    File.open(x, ios ::in);
     string s;
-    while (cin >> s)
+    while (!File.eof())
     {
+        getline(File,s);
+        File.ignore(1, '\n');
         string id = "", pass = "";
         int pos;
         for (int i = 0; i < s.size(); i++)
@@ -136,22 +138,25 @@ void CreateRepo(Element<T> &element, string str, T Func(string, string))
         T node = Func(id, pass);
         element.Add(node);
     }
-    fclose(f);
+    File.close();
 }
 
 int main()
 {
-    CreateRepo(::ListAdmin, "account01.txt", GetAdmin);
+    outfile.open("file.out", ios::out);
+    fstream fAdmin;
+    CreateRepo(::ListAdmin, "account01.txt", GetAdmin, fAdmin);
     for (int i = 0; i < ::ListAdmin.Getsize(); i++)
     {
-        cout << ::ListAdmin.Getindex(i).getUser();
-        cout << endl;
+        outfile << ::ListAdmin.Getindex(i).getUser();
+        outfile << endl;
     }
-
-    CreateRepo(::ListStaff, "account.txt", GetStaff);
+    fstream fStaff;
+    CreateRepo(::ListStaff, "account.txt", GetStaff,fStaff);
     for (int i = 0; i < ::ListStaff.Getsize(); i++)
     {
-        cout << ::ListStaff.Getindex(i).GetID();
-        cout << endl;
+        outfile << ::ListStaff.Getindex(i).GetID();
+        outfile << endl;
     }
+    outfile.close();
 }
