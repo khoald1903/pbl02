@@ -88,3 +88,9 @@ void Staff::Show()
 {
     cout << this->ID << " " << this->Pass << endl;
 }
+
+ostream &operator<<(ostream &out, Staff staff)
+{
+    out << staff.GetID() << staff.GetPass() << endl;
+    return out;
+}

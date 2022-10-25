@@ -17,7 +17,10 @@
         "string_view": "cpp",
         "*.tcc": "cpp",
         "iosfwd": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "string": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp"
     },
     "code-runner.executorMap": {"cpp": "cd $dir && g++ -std=c++14 *.cpp  -o $fileNameWithoutExt&& $dir$fileNameWithoutExt",}
     
