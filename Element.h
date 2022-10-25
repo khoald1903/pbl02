@@ -1,6 +1,7 @@
 #include <iostream>
 #include "admin.h"
 #include "Staff.h"
+#include "Customers.h"
 using namespace std;
 
 template <class T>

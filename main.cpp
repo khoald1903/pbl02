@@ -1,7 +1,10 @@
 #include "Element.h"
+#include "conio.h"
 Element<admin> ListAdmin;
 Element<Staff> ListStaff;
-
+//Element<Customers> ListCustomer;
+// template <class T>
+// void CreateRepo(Element<T> &element, string str, T Func(string, string));
 admin GetAdmin(string user, string pass)
 {
     admin node;
@@ -89,6 +92,7 @@ bool Login(int flag)
     cout << "Moi nhap mat khau: ";
     getline(cin, pass);
 
+    
     if (flag == 1)
     {
         if (CheckAdmin(user, pass) == true)
@@ -103,21 +107,25 @@ bool Login(int flag)
             return true;
         }
     }
-    return false;
+     return false;
 }
-
+fstream File;
 template <class T>
 void CreateRepo(Element<T> &element, string str, T Func(string, string))
 {
     char *x = new char[str.size() - 1];
-    for (int i=0;i<str.size();i++)
+    for (int i = 0; i < str.size(); i++)
     {
-        *(x+i)=str[i];
+        *(x + i) = str[i];
     }
-    FILE* f = freopen(x, "r", stdin);
+    File.open(x, ios ::in);
     string s;
-    while (cin >> s)
+    while (!File.eof())
     {
+        getline(File, s);
+        // File.ignore(1, '\n');
+        if (s[0] == ' ')
+            continue;
         string id = "", pass = "";
         int pos;
         for (int i = 0; i < s.size(); i++)
@@ -136,22 +144,19 @@ void CreateRepo(Element<T> &element, string str, T Func(string, string))
         T node = Func(id, pass);
         element.Add(node);
     }
-    fclose(f);
+    File.close();
+    delete x;
 }
 
 int main()
 {
-    CreateRepo(::ListAdmin, "account01.txt", GetAdmin);
-    for (int i = 0; i < ::ListAdmin.Getsize(); i++)
-    {
-        cout << ::ListAdmin.Getindex(i).getUser();
-        cout << endl;
-    }
+    MenuLogin();
+    CreateRepo(::ListAdmin, "account.txt", GetAdmin);
+    CreateRepo(::ListStaff, "account01.txt", GetStaff);
 
-    CreateRepo(::ListStaff, "account.txt", GetStaff);
-    for (int i = 0; i < ::ListStaff.Getsize(); i++)
-    {
-        cout << ::ListStaff.Getindex(i).GetID();
-        cout << endl;
-    }
+     cout << Login(1);
+     cout << Login(2);
+    cout << "\n";
+    cout <<"Staff:" <<  ListStaff.Getsize();
+    cout << "Admin:" << ListAdmin.Getsize();
 }

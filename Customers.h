@@ -13,6 +13,10 @@ private:
 public:
     Customers();
     ~Customers();
+    string GetID();
+    string GetPass();
+    void SetID(string id);
+    void SetPass(string pass);
     void Set_PhoneNumber();
     void Set_Address();
     void Set_Name();

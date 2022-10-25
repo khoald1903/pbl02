@@ -23,3 +23,23 @@ void Customers::Set_PhoneNumber()
     cout << "Moi nhap so dien thoai: ";
     cin >> this->PhoneNumber;
 }
+
+string Customers::GetID()
+{
+    return this->ID;
+}
+
+string Customers::GetPass()
+{
+    return this->Pass;
+}
+
+void Customers::SetID(string id)
+{
+    this->ID = id;
+}
+
+void Customers::SetPass(string pass)
+{
+    this->Pass = pass;
+}

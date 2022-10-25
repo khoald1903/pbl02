@@ -19,6 +19,7 @@ Staff::Staff(string ID, string Name, string Sex, int Age, string Phonenumber, st
 
 Staff::~Staff()
 {
+    
 }
 void Staff::SetID(string ID)
 {
@@ -87,10 +88,4 @@ string Staff::GetPass()
 void Staff::Show()
 {
     cout << this->ID << " " << this->Pass << endl;
-}
-
-ostream &operator<<(ostream &out, Staff staff)
-{
-    out << staff.GetID() << staff.GetPass() << endl;
-    return out;
 }
