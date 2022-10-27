@@ -31,7 +31,7 @@ ostream &operator<<(ostream &out, ManagerProduct product)
 {
     for (int i = 0; i < product.size; i++)
     {
-        cout << i+1 << " " << product.p[i];
+        cout << i << " " << product.p[i];
     }
 
     return out;
@@ -63,7 +63,7 @@ void ManagerProduct::AddLast(Product product)
 
 void ManagerProduct::DeleteIndexK(int k)
 {
-    Product *temp = new Product[size - 1];
+    Product *temp = new Product[size];
     for (int i = 0; i < k; i++)
     {
         temp[i] = p[i];
@@ -104,4 +104,30 @@ bool ManagerProduct::Update(string id)
         }
     }
     return flag; 
+}
+
+void ManagerProduct::SortASC(int left, int right, bool Func(string, string))
+{
+    int i = left, j = right;
+    Product key = p[(left+right)/2];
+    while (i <= j)
+    {
+        while (Func(p[i].GetID(), key.GetID()) < 0)
+            ++i;
+        while (Func(p[i].GetID(), key.GetID()) > 0)
+            --j;
+
+        if (i <= j)
+        {
+            Product temp = p[i];
+            p[i] = p[j];
+            p[j] = temp;
+            ++i;
+            --j;
+        }
+    }
+    if (left < j)
+        SortASC(left, j, Func);
+    if (i < right)
+        SortASC(i, right, Func);
 }

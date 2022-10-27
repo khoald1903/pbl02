@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <iomanip>
 using namespace std;
 
 class Product
@@ -8,7 +9,7 @@ class Product
         string ID;
         string Name;
         int Size;
-        float Price;
+        double Price;
         string Type;
         string Manufacturer;
 
@@ -17,7 +18,7 @@ class Product
         void SetName(string name);
         void SetSize(int size);
         void SetManufacturer(string producer);
-        void SetPrice(float price);
+        void SetPrice(double price);
         void SetType(string type);
 
         string GetID();
@@ -31,5 +32,5 @@ class Product
         ~Product();
 
         friend ostream& operator<<(ostream& out, Product product);
-        friend istream& operator>>(istream& in, Product product);
+        friend istream& operator>>(istream& in, Product &product);
 };

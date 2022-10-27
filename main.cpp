@@ -1,10 +1,18 @@
 #include "Element.h"
 #include "conio.h"
+#include "ManagerProduct.h"
+ManagerProduct Products;
 Element<admin> ListAdmin;
 Element<Staff> ListStaff;
 //Element<Customers> ListCustomer;
 // template <class T>
 // void CreateRepo(Element<T> &element, string str, T Func(string, string));
+
+bool ASC(string a, string b)
+{
+    return a.compare(b) >= 0;
+}
+
 admin GetAdmin(string user, string pass)
 {
     admin node;
@@ -148,15 +156,95 @@ void CreateRepo(Element<T> &element, string str, T Func(string, string))
     delete x;
 }
 
-int main()
+void Handle()
 {
     MenuLogin();
+    int button;
+    cin >> button;
+    if(button == 1)
+    {
+        while (true)
+        {
+            if (Login(1) == 0)
+            {
+                cout << "Tai khoan hoac mat khau sai! Ban co muon nhap lai khong Y/N\n";
+                char var;
+                cin >> var;
+                if(var == 'Y' || var == 'y') continue;
+                else exit(1);
+            }
+            else break;
+        }
+        while(true)
+        {
+            MenuAdmin();
+            int buttonAdmin;
+            cin >> buttonAdmin;
+            if (buttonAdmin == 1)
+            {   
+                while(true)
+                {
+                cout << "\t\t+------------------------ Quan li san pham  -------------------------+" << endl;
+                cout << "\t\t|                                                                    |" << endl;
+                cout << "\t\t|                      1.  Danh sach san pham                        |" << endl;
+                cout << "\t\t|                      2.  Them san pham                             |" << endl;
+                cout << "\t\t|                      3.  Xoa san pham                              |" << endl;
+                cout << "\t\t|                      4.  Doanh thu                                 |" << endl;
+                cout << "\t\t|                      5.  ////////////                              |" << endl;
+                cout << "\t\t|                      6.  Danh sach khach hang                      |" << endl;
+                cout << "\t\t|                      7.  Thoat                                     |" << endl;
+                cout << "\t\t+---------------------------------------------------------------------" << endl;
+                int choose;
+                cin >> choose;
+                if(choose == 1)
+                {
+                    cout << "Danh sach san pham:\n";
+                    cout << setw(3) << "STT" << "\t\t" << "ID" << "\t" << setw(20) << "Ten" << "\t" << setw(20) << "Nha san xuat"
+                        << "\t" << setw(10) << "Kich thuoc" << "\t" << setw(15) << "Loai giay" << "\t" << setw(20) << "Gia" << endl;
+                    cout << Products;
+                }
+                else if (choose == 2)
+                {
+                    Product x;
+                    cin >> x;
+                    Products.AddLast(x);
+                }
+                else if (choose == 3)
+                {
+                    int k;
+                    cout << "Moi nhap stt san pham can xoa: ";
+                    cin >> k;
+                    Products.DeleteIndexK(k);
+                }
+                else if (choose == 4)
+                {
+                    // cộng tất cả các hoá đơn của khách hàng
+                }
+                else if (choose == 5)
+                {
+                    Products.SortASC(0, Products.GetSize(),ASC);
+                }
+                else if(choose == 6)
+                {
+
+                }
+                else if(choose == 7)
+                {
+                    break;
+                }
+                }
+            }
+        }
+    }
+}
+int main()
+{
     CreateRepo(::ListAdmin, "account.txt", GetAdmin);
     CreateRepo(::ListStaff, "account01.txt", GetStaff);
-
-     cout << Login(1);
-     cout << Login(2);
-    cout << "\n";
-    cout <<"Staff:" <<  ListStaff.Getsize();
-    cout << "Admin:" << ListAdmin.Getsize();
+    Handle();
+    //  cout << Login(1);
+    //  cout << Login(2);
+    // cout << "\n";
+    // cout <<"Staff:" <<  ListStaff.Getsize();
+    // cout << "Admin:" << ListAdmin.Getsize();
 }

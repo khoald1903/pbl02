@@ -28,7 +28,7 @@ void Product::SetManufacturer(string manufacturer)
     this->Manufacturer = manufacturer;
 }
 
-void Product::SetPrice(float price)
+void Product::SetPrice(double price)
 {
     this->Price = price;
 }
@@ -70,23 +70,29 @@ string Product::GetType()
 
 ostream &operator<<(ostream &out, Product product)
 {
-    out << product.ID << "  " << product.Name << "  " << product.Manufacturer
-        << "  " << product.Size << "  " << product.Type << "  " << product.Price << endl;
+    out << "\t" << setw(10) << product.ID << "\t" << setw(20) << product.Name << "\t" << setw(20) << product.Manufacturer
+        << "\t\t" << setw(2) << product.Size << "\t" << setw(15) << product.Type << "\t" << setw(20) << setprecision(3) << fixed << product.Price << endl;
     return out;
 }
 
-istream &operator>>(istream &in, Product product)
+istream &operator>>(istream &in, Product &product)
 {
+    fflush(stdin);
     cout << "Moi nhap ID: "; 
     cin >> product.ID;
+    fflush(stdin);
     cout << "Moi nhap ten: ";
-    cin >> product.Name;
+    getline(cin, product.Name);
+    fflush(stdin);
     cout << "Moi nhap nha san xuat: ";
-    cin >> product.Manufacturer;
+    getline(cin, product.Manufacturer);
+    fflush(stdin);
     cout << "Moi nhap loai giay: ";
-    cin >> product.Type;
+    getline(cin, product.Type);
+    fflush(stdin);
     cout << "Moi nhap size: ";
     cin >> product.Size;
+    fflush(stdin);
     cout << "Moi nhap gia: ";
     cin >> product.Price;
     return in;
