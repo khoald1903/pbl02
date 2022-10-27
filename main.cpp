@@ -1,9 +1,9 @@
 #include "Element.h"
 #include "conio.h"
-#include "ManagerProduct.h"
+#include "fstream"
 ManagerProduct Products;
 Element<admin> ListAdmin;
-Element<Staff> ListStaff;
+Element<Customers> ListCustomer;
 //Element<Customers> ListCustomer;
 // template <class T>
 // void CreateRepo(Element<T> &element, string str, T Func(string, string));
@@ -21,15 +21,29 @@ admin GetAdmin(string user, string pass)
     return node;
 }
 
-Staff GetStaff(string id, string pass)
+Customers GetCustomers(string id, string pass, string name, string sex, string phonenb, string address)
 {
-    Staff node;
+    Customers node;
     node.SetID(id);
     node.SetPass(pass);
+    node.Set_Name(name);
+    node.Set_Sex(sex);
+    node.Set_PhoneNumber(phonenb);
+    node.Set_Address(address);
     return node;
-}   
+}
 
-
+Product GetProduct(string id, string name, int Size, double Price, string type, string manu)
+{
+    Product node;
+    node.SetID(id);
+    node.SetName(name);
+    node.SetSize(Size);
+    node.SetPrice(Price);
+    node.SetType(type);
+    node.SetManufacturer(manu);
+    return node;
+}
 
 void MenuLogin()
 {
@@ -47,8 +61,8 @@ void MenuAdmin()
     cout << "\t\t+------------------------     Admin         -------------------------+" << endl;
     cout << "\t\t|                                                                    |" << endl;
     cout << "\t\t|                      1.  Quan li san pham                          |" << endl;
-    cout << "\t\t|                      3.  Quan li khach hang                        |" << endl;
-    cout << "\t\t|                      4.  Quan li hoa don                           |" << endl;
+    cout << "\t\t|                      2.  Quan li khach hang                        |" << endl;
+    cout << "\t\t|                      3.  Quan li hoa don                           |" << endl;
     cout << "\t\t|                      5.  Thoat                                     |" << endl;
     cout << "\t\t+---------------------------------------------------------------------" << endl;
 }
@@ -79,11 +93,11 @@ bool CheckAdmin(string id, string pass)
 
 bool CheckCustomers(string id, string pass)
 {
-    for (int i = 0; i < ::ListStaff.Getsize(); i++)
+    for (int i = 0; i < ::ListCustomer.Getsize(); i++)
     {
-        if (::ListStaff.Getindex(i).GetID().compare(id) == 0)
+        if (::ListCustomer.Getindex(i).GetID().compare(id) == 0)
         {
-            if (::ListStaff.Getindex(i).GetPass().compare(pass) == 0)
+            if (::ListCustomer.Getindex(i).GetPass().compare(pass) == 0)
                 return true;
         }
     }
@@ -190,8 +204,8 @@ void Handle()
                 cout << "\t\t|                      2.  Them san pham                             |" << endl;
                 cout << "\t\t|                      3.  Xoa san pham                              |" << endl;
                 cout << "\t\t|                      4.  Doanh thu                                 |" << endl;
-                cout << "\t\t|                      5.  ////////////                              |" << endl;
-                cout << "\t\t|                      6.  Danh sach khach hang                      |" << endl;
+                cout << "\t\t|                      5.  Sap xep san pham                          |" << endl;
+                cout << "\t\t|                      6.  Tim kiem san pham                         |" << endl;
                 cout << "\t\t|                      7.  Thoat                                     |" << endl;
                 cout << "\t\t+---------------------------------------------------------------------" << endl;
                 int choose;
@@ -226,22 +240,102 @@ void Handle()
                 }
                 else if(choose == 6)
                 {
-
+                    string name;
+                    cout << "Moi nhap ten san pham can tim kiem:";
+                    fflush(stdin);
+                    getline(cin, name);
+                    cout << setw(3) << "STT"
+                         << "\t\t"
+                         << "ID"
+                         << "\t" << setw(20) << "Ten"
+                         << "\t" << setw(20) << "Nha san xuat"
+                         << "\t" << setw(10) << "Kich thuoc"
+                         << "\t" << setw(15) << "Loai giay"
+                         << "\t" << setw(20) << "Gia" << endl;
+                    Products.Search(name);
                 }
-                else if(choose == 7)
+                else if (choose == 7)
                 {
                     break;
                 }
+
                 }
+            }
+            else if (buttonAdmin == 2)
+            {
+                //quan li khach hang - xuat danh sach khach hang
+                for(int i = 0; i < ListCustomer.Getsize(); i++)
+                {
+                    cout << ListCustomer.Getindex(i);
+                }
+            }
+            else if (buttonAdmin == 3)
+            {
+                //quan li hoa don
+                //nhap id khach
+                
             }
         }
     }
 }
+
+
+
 int main()
 {
     CreateRepo(::ListAdmin, "account.txt", GetAdmin);
-    CreateRepo(::ListStaff, "account01.txt", GetStaff);
+    //CreateRepo(::ListCustomer, "account01.txt", GetCustomers);
+    File.open("account01.txt", ios ::in);
+    while(!File.eof())
+    {
+        string up, name, sex, phone, address;
+        File>>up;
+        File>>name;
+        File>>sex;
+        File>>phone;
+        getline(File,address);
+        string id = "", pass = "";
+        int pos;
+        for (int i = 0; i < up.size(); i++)
+        {
+            if (up[i] == '|')
+            {
+                pos = i;
+                break;
+            }
+        }
+        for (int i = 0; i < pos; i++)
+            id += up[i];
+        for (int i = pos + 1; i < up.size(); i++)
+            pass += up[i];
+
+        Customers x;
+        x = GetCustomers(id,pass, name, sex,phone,address);
+        ListCustomer.Add(x);
+    }
+    File.close();
+
+
+    File.open("products.txt", ios ::in);
+    while (!File.eof())
+    {
+        string id, name, manu, type;
+        int size;
+        double price;
+        File >> id;
+        File >> name;
+        File >> size;
+        File >> price;
+        File >> type;
+        getline(File, manu);
+        Product x;
+        x = GetProduct(id, name, size, price, type, manu);
+        Products.AddLast(x);
+    }
+    File.close();
+
     Handle();
+
     //  cout << Login(1);
     //  cout << Login(2);
     // cout << "\n";

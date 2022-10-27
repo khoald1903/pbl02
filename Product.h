@@ -11,15 +11,17 @@ class Product
         int Size;
         double Price;
         string Type;
+        int Amount;
         string Manufacturer;
 
     public: 
-        void SetID(string id);
-        void SetName(string name);
-        void SetSize(int size);
-        void SetManufacturer(string producer);
-        void SetPrice(double price);
-        void SetType(string type);
+        void SetID(string);
+        void SetName(string);
+        void SetSize(int);
+        void SetManufacturer(string);
+        void SetPrice(double);
+        void SetType(string);
+        void SetAmount(int);
 
         string GetID();
         string GetName();
@@ -27,10 +29,11 @@ class Product
         string GetManufacturer();
         float GetPrice();
         string GetType();
+        int GetAmount();
 
         Product();
         ~Product();
 
-        friend ostream& operator<<(ostream& out, Product product);
-        friend istream& operator>>(istream& in, Product &product);
+        friend ostream& operator<<(ostream&, Product);
+        friend istream& operator>>(istream&, Product&);
 };

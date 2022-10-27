@@ -1,13 +1,12 @@
 #include <iostream>
-#include "admin.h"
-#include "Staff.h"
+//#include "Staff.h"
 #include "Customers.h"
+#include "admin.h"
 using namespace std;
 
 template <class T>
 class Element
 {
-
     T *F;
     int realsize;
     int size;

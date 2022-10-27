@@ -17,6 +17,7 @@ class ManagerProduct
         bool Update(string id);
         Product Getindex(int i);
         void SortASC(int , int );
+        void Search(string name); 
 
         Product &operator[](int i);
         friend ostream &operator<<(ostream &out, ManagerProduct &product);

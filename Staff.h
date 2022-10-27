@@ -11,7 +11,7 @@ private:
     string ID;
     string Pass;
     int Age;
-
+   // bool Admin;
 public:
     
     Staff();
@@ -33,6 +33,8 @@ public:
     float GetSalary();
     void SetPass(string Pass);
     string GetPass();
+   // void SetAdmin(bool admin);
+   // bool GetAdmin();
     friend ostream &operator<<(ostream &, Staff);
     //friend istream &operator>>(istream &, Staff &);
     void Show();

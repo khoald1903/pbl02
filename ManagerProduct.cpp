@@ -39,14 +39,14 @@ ostream &operator<<(ostream &out, ManagerProduct &product)
 
 void ManagerProduct::AddIndexK(Product product, int k)
 {
-    Product *temp = new Product[size + 1];
+    Product *temp = new Product[this->size + 1];
     for (int i = 0; i < k; i++)
     {
         temp[i] = p[i];
     }
     temp[k] = product;
-    size++;
-    for (int i = k + 1; i < size; i++)
+    (this->size)++;
+    for (int i = k + 1; i < this->size; i++)
     {
         temp[i] = p[i - 1];
     }
@@ -63,16 +63,16 @@ void ManagerProduct::AddLast(Product product)
 
 void ManagerProduct::DeleteIndexK(int k)
 {
-    Product *temp = new Product[size-1];
+    Product *temp = new Product[this->size - 1];
     for (int i = 0; i < k; i++)
     {
         temp[i] = p[i];
     }
-    for (int i = k + 1; i < size; i++)
+    for (int i = k + 1; i < this->size; i++)
     {
         temp[i - 1] = p[i];
     }
-    size--;
+    this->size--;
     delete[] p;
     p = temp;
     temp = new Product;
@@ -85,7 +85,7 @@ bool ManagerProduct::Update(string id)
     string name, manufacturer, type;
     int size;
     float price;
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < this->size; i++)
     {
         if(this->p[i].GetID().compare(id) == 0)
         {
@@ -112,11 +112,11 @@ void ManagerProduct::SortASC(int l, int r)
     int i = l, j = r;
     while (i < j)
     {
-        while ( p[i].GetPrice() > key.GetPrice())
+        while ( p[i].GetPrice() < key.GetPrice())
         {
             i++;
         }
-        while (p[i].GetPrice() < key.GetPrice())
+        while (p[j].GetPrice() > key.GetPrice())
         {
             j--;
         }
@@ -136,5 +136,15 @@ void ManagerProduct::SortASC(int l, int r)
     if (l < j)
     {
         SortASC(l, j);
+    }
+}
+
+
+void ManagerProduct::Search(string name)
+{
+    for(int i = 0; i < this->size; i++)
+    {
+        if(p[i].GetName().compare(name) == 0)
+            cout << i << " " << p[i];
     }
 }

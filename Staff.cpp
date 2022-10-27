@@ -85,6 +85,14 @@ string Staff::GetPass()
 {
     return this->Pass;
 }
+// void Staff::SetAdmin(bool admin)
+// {
+//     this->Admin=admin;
+// }
+// bool Staff::GetAdmin()
+// {
+//     return this->Admin;
+// }
 void Staff::Show()
 {
     cout << this->ID << " " << this->Pass << endl;
