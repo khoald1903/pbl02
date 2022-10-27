@@ -4,6 +4,9 @@
 ManagerProduct Products;
 Element<admin> ListAdmin;
 Element<Customers> ListCustomer;
+Element<Bill> Bills;
+string user;
+
 //Element<Customers> ListCustomer;
 // template <class T>
 // void CreateRepo(Element<T> &element, string str, T Func(string, string));
@@ -67,11 +70,22 @@ void MenuAdmin()
     cout << "\t\t+---------------------------------------------------------------------" << endl;
 }
 
+void ManagerBill()
+{
+    cout << "\t\t+------------------------ Quan li hoa don  -------------------------+" << endl;
+    cout << "\t\t|                                                                    |" << endl;
+    cout << "\t\t|                      1.  Danh sach hoa don                         |" << endl;
+    cout << "\t\t|                      2.  Xoa hoa don                               |" << endl;
+    cout << "\t\t|                      3.  Tim kiem san pham                         |" << endl;
+    cout << "\t\t|                      4.  Thoat                                     |" << endl;
+    cout << "\t\t+---------------------------------------------------------------------" << endl;
+}
+
 void MenuCustomer()
 {
     cout << "\t\t+------------------------     Khach hang    -------------------------+" << endl;
     cout << "\t\t|                                                                    |" << endl;
-    cout << "\t\t|                      1.  Danh sach san pham                        |" << endl;
+    cout << "\t\t|                      1.  Mua hang                                  |" << endl;
     cout << "\t\t|                      2.  Gio hang                                  |" << endl;
     cout << "\t\t|                      3.  Hoa don                                   |" << endl;
     cout << "\t\t|                      4.  Thoat                                     |" << endl;
@@ -106,25 +120,24 @@ bool CheckCustomers(string id, string pass)
 
 bool Login(int flag)
 {
-    string user;
     string pass;
     fflush(stdin);
     cout << "Moi nhap user: ";
-    getline(cin, user);
+    getline(cin, ::user);
     cout << "Moi nhap mat khau: ";
     getline(cin, pass);
 
     
     if (flag == 1)
     {
-        if (CheckAdmin(user, pass) == true)
+        if (CheckAdmin(::user, pass) == true)
         {
             return true;
         }
     }
     else if (flag == 2)
     {
-        if (CheckCustomers(user, pass) == true)
+        if (CheckCustomers(::user, pass) == true)
         {
             return true;
         }
@@ -169,6 +182,9 @@ void CreateRepo(Element<T> &element, string str, T Func(string, string))
     File.close();
     delete x;
 }
+
+
+
 
 void Handle()
 {
@@ -271,10 +287,118 @@ void Handle()
             }
             else if (buttonAdmin == 3)
             {
-                //quan li hoa don
-                //nhap id khach
+                int n;
+                while(true)
+                {
+                    /*
+                    cout << "\t\t+------------------------ Quan li hoa don  -------------------------+" << endl;
+                    cout << "\t\t|                                                                    |" << endl;
+                    cout << "\t\t|                      1.  Danh sach hoa don                         |" << endl;
+                    cout << "\t\t|                      2.  Xoa hoa don                               |" << endl;
+                    cout << "\t\t|                      3.  Tim kiem                                  |" << endl;
+                    cout << "\t\t|                      4.  Thoat                                     |" << endl;
+                    cout << "\t\t+---------------------------------------------------------------------" << endl;
+                    */
+                    ManagerBill();
+                    cin >> n;
+                    if(n == 1)
+                    {
+                        for(int i = 0; i < Bills.Getsize(); i++)
+                        {
+                            Bills.Getindex(i).Show();
+                        }
+                    }
+                    else if(n == 2)
+                    {
+                        int k;
+                        cout << "Moi nhap stt hoa don can xoa:";
+                        cin >> k;
+                        Bills.Delete(k);
+                    }
+                    else if(n == 3)
+                    {
+                        string idb;int flag = 0;
+                        fflush(stdin);
+                        cout << "Moi nhap IDB can tim:";
+                        getline(cin, idb);
+                        for (int i = 0; i < Bills.Getsize(); i++)
+                        {
+                            if(Bills.Getindex(i).GetIDB().compare(idb) == 0)
+                            {
+                                flag = 1;
+                                Bills.Getindex(i).Show();
+                                break;
+                            }
+                        }
+                        if(flag == 0) cout << "Khong tim thay Bill!\n";
+                    }
+                    else if(n == 4) break;
+                }
                 
             }
+        }
+    }
+    else if (button == 2)
+    {
+        while(true)
+        {
+            if (Login(2) == 0)
+            {
+                cout << "Tai khoan hoac mat khau sai! Ban co muon nhap lai khong Y/N\n";
+                char var;
+                cin >> var;
+                if (var == 'Y' || var == 'y')
+                    continue;
+                else
+                    exit(1);
+            }
+            else break;
+        }
+
+        while(true)
+        {
+            MenuCustomer();
+                /*
+                cout << "\t\t+------------------------     Khach hang    -------------------------+" << endl;
+        cout << "\t\t|                                                                    |" << endl;
+        cout << "\t\t|                      1.  Mua hang                                  |" << endl;
+        cout << "\t\t|                      2.  Gio hang                                  |" << endl;
+        cout << "\t\t|                      3.  Hoa don                                   |" << endl;
+        cout << "\t\t|                      4.  Thoat                                     |" << endl;
+        cout << "\t\t+---------------------------------------------------------------------" << endl;
+                */
+                int n;
+            cin >> n;
+            if (n == 1)
+            {
+                cout << "Danh sach san pham:\n";
+                cout << setw(3) << "STT"
+                    << "\t\t"
+                    << "ID"
+                    << "\t" << setw(20) << "Ten"
+                    << "\t" << setw(20) << "Nha san xuat"
+                    << "\t" << setw(10) << "Kich thuoc"
+                    << "\t" << setw(15) << "Loai giay"
+                    << "\t" << setw(20) << "Gia" << endl;
+                cout << Products;
+                // Element<Customers> ListCustomer;
+                int index = 0;
+                for(int i = 0; i < ListCustomer.Getsize(); i++)
+                {
+                    if(::user.compare(ListCustomer.Getindex(i).GetID()) == 0)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                Bills.Add(ListCustomer.Getindex(index).Buy(Products));
+    
+                Bills.Getindex(Bills.Getsize() - 1).Show();
+                ListCustomer.Getindex(index).ShowItems();
+                
+           }
+
         }
     }
 }
@@ -310,7 +434,7 @@ int main()
             pass += up[i];
 
         Customers x;
-        x = GetCustomers(id,pass, name, sex,phone,address);
+        x = GetCustomers(id, pass, name, sex, phone, address);
         ListCustomer.Add(x);
     }
     File.close();
@@ -335,6 +459,7 @@ int main()
     File.close();
 
     Handle();
+
 
     //  cout << Login(1);
     //  cout << Login(2);

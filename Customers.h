@@ -1,12 +1,14 @@
 #include <iostream>
 #include "ManagerProduct.h"
+#include "Bill.h"
+
 using namespace std;
 
 class Customers
 {
+
 private:
     ManagerProduct cart;
-
     string PhoneNumber;
     string Address;
     string Name;
@@ -14,7 +16,10 @@ private:
     string ID;
     string Pass;
 
+    int cnt;
+
 public:
+
     Customers();
     ~Customers();
 
@@ -33,8 +38,11 @@ public:
     string Get_Sex();
     string Get_Name();
 
-    void AddCart(ManagerProduct Products);
-    double SumPrice();
 
+    void ShowItems();
+    Bill Buy(ManagerProduct Products);
+
+    double SumPrice();
+    string ToString(int);
     friend ostream& operator<<(ostream& out, Customers customer);
 };

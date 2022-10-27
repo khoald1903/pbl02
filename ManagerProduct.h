@@ -7,7 +7,6 @@ class ManagerProduct
         int size;
     public:
         ManagerProduct();
-        ~ManagerProduct();
 
         int GetSize();
         void AddIndexK(Product product, int k);
@@ -21,4 +20,5 @@ class ManagerProduct
 
         Product &operator[](int i);
         friend ostream &operator<<(ostream &out, ManagerProduct &product);
+        ~ManagerProduct();
 };

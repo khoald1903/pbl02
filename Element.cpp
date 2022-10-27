@@ -56,5 +56,6 @@ template <class T> void Element<T> ::Delete(int index)
 template class Element<int>;
 template class Element<admin>;
 template class Element<Customers>;
+template class Element<Bill>;
 
 //template class Element<Staff>;

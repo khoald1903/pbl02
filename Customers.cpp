@@ -2,6 +2,7 @@
 
 Customers::Customers()
 {
+    cnt = 0;
 }
 Customers::~Customers()
 {
@@ -73,15 +74,49 @@ string Customers::Get_Sex()
     return this->Sex;
 }
 
-void Customers::AddCart(ManagerProduct Products)
-{   
-    int n = 0;
-    while(n != -1)
+string Customers::ToString(int a)
+{
+    string temp = "";
+    while(a > 0)
     {
-        cout << "Moi nhap STT san pham can mua hoac bam -1 de thoat:";
-        cin >> n;
-        cart.AddLast(Products.Getindex(n));
+        char r = a%10 - '0';
+        temp+=r;
+        a/=10;
     }
+    string temp2 ="";
+    for(int i = temp.size() - 1; i>=0; i--) temp2+=temp[i];
+    return temp2;
+}
+
+void Customers::ShowItems(){
+    cout << this->cart.GetSize();
+}
+
+
+Bill Customers::Buy(ManagerProduct Products)
+{
+    time_t hientai = time(0);
+    tm *dt = localtime(&hientai);
+
+    Bill temp;
+    temp.SetDay(dt->tm_mday);
+    temp.SetMonth(dt->tm_mon + 1);
+    temp.SetYear(dt->tm_year + 1900);
+    temp.SetNameCustomer(this->Name);
+    temp.SetIDC(this->ID);
+    temp.SetPhoneNB(this->PhoneNumber);
+    temp.SetIDB(this->Name + to_string(++cnt));
+    int n = 0;
+    while(true)
+    {
+        cout << "Moi nhap STT san pham can mua hoac bam -1 de thanh toan:";
+        cin >> n;
+        if(n == -1) break;
+        this->cart.AddLast(Products.Getindex(n));
+    }
+    temp.SetSumPrice(SumPrice());
+    delete[] dt;
+    return temp;
 }   
 
 double Customers::SumPrice()

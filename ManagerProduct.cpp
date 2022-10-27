@@ -6,10 +6,6 @@ ManagerProduct::ManagerProduct()
     size = 0;
 }
 
-ManagerProduct::~ManagerProduct()
-{
-    delete[] p;
-}
 
 Product& ManagerProduct::operator[](int i)
 {
@@ -147,4 +143,9 @@ void ManagerProduct::Search(string name)
         if(p[i].GetName().compare(name) == 0)
             cout << i << " " << p[i];
     }
+}
+
+ManagerProduct::~ManagerProduct()
+{
+    delete[] p;
 }
