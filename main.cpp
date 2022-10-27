@@ -222,7 +222,7 @@ void Handle()
                 }
                 else if (choose == 5)
                 {
-                    Products.SortASC(0, Products.GetSize(),ASC);
+                    Products.SortASC(0, Products.GetSize() - 1);
                 }
                 else if(choose == 6)
                 {
