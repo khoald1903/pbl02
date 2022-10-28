@@ -93,15 +93,16 @@ bool ManagerProduct::Update(string id)
             flag = true;
             fflush(stdin);
             cout << "Moi nhap ten moi: ";
-            cin >> name;
+            cin >> name; this->p[i].SetName(name);
             cout << "Moi nhap nha san xuat: ";
-            cin >> manufacturer;
+            cin >> manufacturer;this->p[i].SetManufacturer(manufacturer);
             cout << "Moi nhap loai giay: "; 
-            cin >> type;
+            cin >> type; this->p[i].SetType(type);
             cout << "Moi nhap size: "; 
-            cin >> size;
+            cin >> size; this->p[i].SetSize(size);
             cout << "Moi nhap gia: "; 
             cin >>price;
+            this->p[i].SetPrice(price);
         }
     }
     return flag; 

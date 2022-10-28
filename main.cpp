@@ -21,7 +21,8 @@ void AddProductFile()
     fo.open("products.txt", ios::out);
     for (int i = 0; i < Products.GetSize(); i++)
     {
-        fo << Products.Getindex(i).GetID() << " " << Products.Getindex(i).GetName() << " " << Products.Getindex(i).GetSize() << " " << Products.Getindex(i).GetPrice() << " " << Products.Getindex(i).GetType() << " " << Products.Getindex(i).GetManufacturer() << '\n';
+        fo << Products.Getindex(i).GetID() << " " << Products.Getindex(i).GetName() << " " << Products.Getindex(i).GetSize() << " " << Products.Getindex(i).GetPrice() << " " << Products.Getindex(i).GetType() << " " << Products.Getindex(i).GetManufacturer();
+        if (i < Products.GetSize() - 1) fo << "\n";
     }
 }
 
@@ -198,6 +199,7 @@ void CreateRepo(Element<T> &element, string str, T Func(string, string))
 
 void Handle()
 {
+    cout << "\t\t+------------------ Chuong trinh quan li ban giay  -------------------+" << endl;
     MenuLogin();
     int button;
     cin >> button;
@@ -236,7 +238,8 @@ void Handle()
                 cout << "\t\t|                      4.  Doanh thu                                 |" << endl;
                 cout << "\t\t|                      5.  Sap xep san pham                          |" << endl;
                 cout << "\t\t|                      6.  Tim kiem san pham                         |" << endl;
-                cout << "\t\t|                      7.  Thoat                                     |" << endl;
+                cout << "\t\t|                      7.  Cap nhat san pham                         |" << endl;
+                cout << "\t\t|                      8.  Thoat                                     |" << endl;
                 cout << "\t\t+---------------------------------------------------------------------" << endl;
                 int choose;
                 cin >> choose;
@@ -262,7 +265,7 @@ void Handle()
                 }
                 else if (choose == 4)
                 {
-                    int sum = 0;
+                    long long sum = 0;
                     for(int i = 0; i < Bills.Getsize(); i++)
                     {
                         sum+= Bills.Getindex(i).GetSumPrice();
@@ -292,6 +295,16 @@ void Handle()
                     Products.Search(name);
                 }
                 else if (choose == 7)
+                {
+                    string id;
+                    fflush(stdin);
+                    cout << "Moi nhap ID can thay doi:";
+                    cin >> id;
+                    bool flag = Products.Update(id);
+                    if(flag == true) cout << "Cap nhat thanh cong!" << endl;
+                    else cout << "Cap nhat that bai xin kiem tra lai!" << endl;
+                }
+                else if (choose == 8)
                 {
                     AddProductFile();
                     break;
@@ -342,7 +355,6 @@ void Handle()
                             {
                                 flag = 1;
                                 Bills.Getindex(i).Show();
-                                break;
                             }
                         }
                         if(flag == 0) cout << "Khong tim thay Bill!\n";
@@ -402,8 +414,8 @@ void Handle()
                     }
                 }
                 Bills.Add(ListCustomer.Getindex(index).Buy(Products));
-                
-                
+
+                cout << "\t+-----------------------------Hoa don---------------------------------" << endl;
                 Bills.Getindex(Bills.Getsize() - 1).Show();
                 cout <<"\t\t"<< setw(15) << "Ten" << "\t\t" << setw(15) << "Gia" << endl;
                 ListCustomer.Getindex(index).ShowItems();
@@ -424,7 +436,7 @@ void Handle()
     else if (button == 4)
     {
         cout << "Tam biet !";
-    } 
+    }
 }
 void Xuathoadon()
 {
@@ -436,7 +448,8 @@ void Xuathoadon()
         fo << "Ngay Thang Nam thanh toan: " << Bills.Getindex(i).GetDay() << "/" << Bills.Getindex(i).GetMonth() << "/" << Bills.Getindex(i).GetYear()<<'\n';
         fo << "Ma khach hang: " << Bills.Getindex(i).GetIDC() << '\n';
         fo << "Ten khach hang: " << Bills.Getindex(i).GetNameCustomer() << '\n';
-        fo << "Tong tien: "<<Bills.Getindex(i).GetSumPrice()<<'\n';
+        fo << "Tong tien: "<<Bills.Getindex(i).GetSumPrice();
+        if (Bills.Getsize()-1 > i) cout << "\n";
     }
 }
 

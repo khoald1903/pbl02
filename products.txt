@@ -1,6 +1,6 @@
-S02 TT 40 300000 Sneaker   Addidas
-S05 TL 42 100000 sport   Nike
-S03 TK 30 250000 sport   Nike 
-S04 TCB 40 350000 Sneaker   Addidas
-S06 VCB 42 160000 sport   Nike
-S07 LK 45 250000 Sport  DK
+S06 ADD 43 200000 sneaker Nike
+S03 TK 30 250000 sport       Nike 
+S07 LK 45 250000 Sport      DK
+S02 TT 40 300000 Sneaker       Addidas
+S04 TCB 40 350000 Sneaker       Addidas
+S05 TKL 45 500000 sport  SX

@@ -23,7 +23,7 @@ class Bill : public Date
     string IDC;
     string NameCustomer;
     string Phonenb;
-    double SumPrice;
+    int SumPrice;
 
 
     public:
@@ -48,6 +48,6 @@ class Bill : public Date
     void SetNameCustomer(string NameCustomer);
     string GetNameCustomer();
     void SetSumPrice(int SumPrice);
-    double GetSumPrice();
+    int GetSumPrice();
     void Show();
 };

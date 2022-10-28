@@ -69,7 +69,7 @@ void Bill::SetSumPrice(int SumPrice)
 {
     this->SumPrice = SumPrice;
 }
-double Bill::GetSumPrice()
+int Bill::GetSumPrice()
 {
     return this->SumPrice;
 }
