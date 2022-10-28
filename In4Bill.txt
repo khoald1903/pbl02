@@ -1,0 +1,35 @@
+Ma hoa don: Bin1
+Ngay Thang Nam thanh toan: 28/10/2022
+Ma khach hang: bin123
+Ten khach hang: Bin
+Tong tien: 550000
+Ma hoa don: Bin1
+Ngay Thang Nam thanh toan: 28/10/2022
+Ma khach hang: bin123
+Ten khach hang: Bin
+Tong tien: 550000
+Ma hoa don: Bin1
+Ngay Thang Nam thanh toan: 28/10/2022
+Ma khach hang: bin123
+Ten khach hang: Bin
+Tong tien: 250000
+Ma hoa don: Bin1
+Ngay Thang Nam thanh toan: 28/10/2022
+Ma khach hang: bin123
+Ten khach hang: Bin
+Tong tien: 250000
+Ma hoa don: Bin1
+Ngay Thang Nam thanh toan: 28/10/2022
+Ma khach hang: bin123
+Ten khach hang: Bin
+Tong tien: 250000
+Ma hoa don: Bin1
+Ngay Thang Nam thanh toan: 28/10/2022
+Ma khach hang: bin123
+Ten khach hang: Bin
+Tong tien: 8.21251e+06
+Ma hoa don: Bin1
+Ngay Thang Nam thanh toan: 28/10/2022
+Ma khach hang: bin123
+Ten khach hang: Bin
+Tong tien: 0
