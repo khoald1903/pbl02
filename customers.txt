@@ -1,0 +1,2 @@
+bin123|1|Le Van Huy|Nam|01234456789|Quang Nam|
+duc|2|Nguyen Van Duc|nam|0123333333|Quang Nam|

@@ -1,0 +1,43 @@
+Ma hoa don: Le Van Huy0
+Ngay Thang Nam thanh toan: 25/11/2022
+Ma khach hang: bin123
+Ten khach hang: Le Van Huy
+Tong tien: 1200000
+[
+.S06 77|ADD|43|200000|sneaker|4|Nike
+.S09|asdjashd|50|200000|asjdla|2|asjdahsd
+]
+Ma hoa don: Le Van Huy1
+Ngay Thang Nam thanh toan: 25/11/2022
+Ma khach hang: bin123
+Ten khach hang: Le Van Huy
+Tong tien: 200000
+[
+.S06 77|ADD|43|200000|sneaker|1|Nike
+]
+Ma hoa don: Nguyen Van Duc2
+Ngay Thang Nam thanh toan: 25/11/2022
+Ma khach hang: duc
+Ten khach hang: Nguyen Van Duc
+Tong tien: 700615
+[
+.S09|asdjashd|50|200000|asjdla|1|asjdahsd
+.S07|asdjashd|50|100123|asjdla|5|asjdahsd
+]
+Ma hoa don: Nguyen Van Duc3
+Ngay Thang Nam thanh toan: 25/11/2022
+Ma khach hang: duc
+Ten khach hang: Nguyen Van Duc
+Tong tien: 5800000
+[
+.S09 11|CHUNGKY|40|1500000|Sneaker|2|Addidas
+.S07|AIR JORDAN|50|1400000|Basketball Shoes|2|Nike
+]
+Ma hoa don: Le Van Huy4
+Ngay Thang Nam thanh toan: 21/12/2022
+Ma khach hang: bin123
+Ten khach hang: Le Van Huy
+Tong tien: 1400000
+[
+.S07|AIR JORDAN|50|1400000|Basketball|1|Nike
+]
